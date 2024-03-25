@@ -21,14 +21,15 @@ const item: ItFn = (a, b) => {
 // let sum: ISum = (a, b) => {
 //   return a + b;
 // };
+
 // 3）会根据上下文来推导赋予值的类型 (根据位置来进行推导的)
-// type ICallback = (a: string, b: number, c: boolean) => void;
+type ICallback = (a: string, b: number, c: boolean) => void;
 
 // void 表示不关心返回的具体类型
-// function fn(callback: ICallback) {}
-// fn((x, y, z) => {
-//   return {};
-// });
+function fn1(callback: ICallback) {}
+fn1((x, y, z) => {
+  return "112";
+});
 
 // typeof 和 keyof的使用
 const prsn = {
