@@ -23,6 +23,7 @@ interface Fish {
 interface Water {
   name: "水";
 }
+
 type Conditional1<T> = T extends Bird ? Sky : Water;
 type R4 = Conditional1<Fish>;
 
