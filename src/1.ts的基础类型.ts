@@ -1,4 +1,7 @@
 // ts的基础类型
+/* 
+  string、number、[]、{}、never、any、unknow、boolean、symbol、bigInt、null、undefined
+*/
 
 const name: string = "a";
 const age: number = 1;

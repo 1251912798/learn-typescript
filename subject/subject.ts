@@ -3,13 +3,11 @@ function getObj(name: string, age: number) {
   return { name, age };
 }
 
-// type funcType<T extends (...arg: any[]) => any> = T extends (
-//   ...arg: any
-// ) => infer P
-//   ? P
-//   : never;
+type func<T extends (...args: any) => any> = T extends (...args: any) => infer P
+  ? P
+  : never;
 
-// type R1 = funcType<typeof getObj>;
+type R1 = func<typeof getObj>;
 
 // 求差集  用第一个和第二个类型的公共部分
 type R6 = Cha<1 | 2 | 3, 1 | 2 | 4>;
@@ -17,8 +15,8 @@ type R6 = Cha<1 | 2 | 3, 1 | 2 | 4>;
 type Cha<T, U> = T extends U ? T : never;
 
 //  实现[ 30 , 'jw']
-// type Swap<T> = T extends Array<>
-// type R13 = Swap<["jw", 30]>;
+type Swap<T> = T extends [infer P, infer R] ? [R, P] : never;
+type R13 = Swap<["jw", 30]>;
 
 // 头尾交换
 type R14 = SwapHeadTail<[1, 2, 3, 4, 5, 6, 7]>;
@@ -48,10 +46,12 @@ interface IAddress {
   x: 100;
   y: 100;
 }
+
 // 实现Partial属性可选
 type MyPartial<T> = {
   [K in keyof T]?: T[K] extends object ? MyPartial<T[K]> : never;
 };
+type AA = Partial<Person>;
 
 type R22 = MyPartial<Person>;
 
@@ -69,13 +69,16 @@ type MyReadonly<T> = {
 
 type R11 = MyReadonly<R21>;
 // 实现Pick 挑出需要的属性
-type MyPick<T, K extends keyof T> = {
-  [Key in K]: T[Key];
-};
 
+type MyPick<T, U extends keyof T> = {
+  [K in U]: T[K];
+};
 type R222 = MyPick<Person, "address" | "age">;
 
 // 实现Omit 去掉不需要的属性
-type MyOmit<T, K extends keyof T> = MyPick<T, Exclude<keyof T, K>>;
 
-type R2221 = MyOmit<Person, "name">;
+type R221 = myOmit<Person, "age">;
+type myOmit<T, U extends keyof T> = { [P in Exclude<keyof T, U>]: T[P] };
+
+
+export {};

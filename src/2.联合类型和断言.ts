@@ -34,7 +34,7 @@ let app: props = {
 // 可以使用联合类型来做到属性之间的互斥（可辨识联合类型）
 
 // 类型断言
-// 1.
+// 1.as
 let ele: HTMLElement | null = document.querySelector("app");
 
 ele!.style.color = "red";

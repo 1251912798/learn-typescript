@@ -75,6 +75,8 @@ function getObj(name: string, age: number) {
   return { name, age };
 }
 
+type Arr = ReturnType<typeof getObj>;
+
 // type ReturnType<T extends (...args: any[]) => any> = T extends (
 //   ...args: any[]
 // ) => infer R
